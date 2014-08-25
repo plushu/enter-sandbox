@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  if err
+    .alert.error= err
+  form(method="POST")
+    textarea.key-input(name="ssh_key")
+    button.green-button Add public key
