@@ -23,9 +23,11 @@ main {
   color: #fff;
   border-radius: 4px;
   border: 1px solid #4a4;
-  width: 782px;
+  width: 800px;
   font-size: 24pt;
+  box-sizing: border-box;
   padding: 8px;
+  display: block;
 }
 .green-button:hover, .green-button:focus {
   background-color: #494;
@@ -37,6 +39,9 @@ main {
   height: 200px;
   font-size: 14pt;
   margin-bottom: 20px;
+  box-sizing: border-box;
+  padding: 8px;
+  display: block;
 }
 .alert {
   padding: 15px;
