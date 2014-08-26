@@ -3,12 +3,15 @@ var bodyParser = require('body-parser');
 var spawn = require('child_process').spawn;
 
 var addKeyCommand = [
+  'temp=`mktemp`',
+  'printf "%s" "$0" >> "$temp"',
   // Validate the public key by getting a fingerprint for it. This will fail
   // for any invalid public key. This would *succeed* for any *private* key,
   // were it not for the fact that we forcibly convert every key to a single
   // line before performing this test - SSH does not have a valid single-line
   // format for private keys, so this test keeps them out, too.
-  'ssh-keygen -lf /dev/stdin <<<"$0"',
+  'ssh-keygen -lf "$temp"',
+  'rm "$temp"',
   // Add it to the authorized_keys files
   'printf "%s" "$0" >> /root-ssh/authorized_keys',
   'printf "%s" "$0" >> /plushu-ssh/authorized_keys'].join(' && ');
