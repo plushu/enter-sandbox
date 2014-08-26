@@ -34,6 +34,12 @@ app.post('/', function(req, res, next) {
     req.body.ssh_key.replace(/[\r\n]/g,'').trim();
   if (key) {
     var addKey = spawn('bash', ['-ec', addKeyCommand, key+'\n']);
+    addKey.stdout.on('data', function (data) {
+      console.log('stdout: ' + data);
+    });
+    addKey.stderr.on('data', function (data) {
+      console.log('stderr: ' + data);
+    });
     addKey.on('close', function (code) {
       if (code) {
         return bounceErr('Invalid public key');
